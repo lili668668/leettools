@@ -1,43 +1,43 @@
 import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { list } from './list'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [choice, setChoice] = useState<string>('')
+  const [input, setInput] = useState<string>('')
+  const [output, setOutput] = useState<string>('')
+  const options = [{ key: '', name: '請選擇' }].concat(
+    Object.keys(list)
+      .map((key) => {
+        return { key, name: list[key].name }
+      })
+  )
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+    <div>
+      <p>這是一個把寫過的演算法題目，放過來的小工具網站</p>
+      <div>
+        <select value={choice} onChange={(e) => setChoice(e.target.value)}>
+          {options.map((item) => (<option value={item.key} key={item.key}>{item.name}</option>))}
+        </select>
+      </div>
+      <div>
+        <textarea placeholder='input' value={input} onChange={(e) => setInput(e.target.value)} />
+      </div>
+      <button
+        disabled={choice === ''}
+        onClick={() => {
+          try {
+            const output = list[choice].exec(input)
+            setOutput(output)
+          } catch (error) {
+            setOutput(`${error}`)
+          }
+        }}
+      >
+        執行
+      </button>
+      <div>
+        <textarea placeholder='output' value={output} readOnly />
+      </div>
     </div>
   )
 }
