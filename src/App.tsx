@@ -20,7 +20,7 @@ function App() {
         </select>
       </div>
       <div>
-        <textarea placeholder='input' value={input} onChange={(e) => setInput(e.target.value)} />
+        <textarea placeholder={list[choice]?.inputPlaceholder ?? 'input'} value={input} onChange={(e) => setInput(e.target.value)} />
       </div>
       <button
         disabled={choice === ''}
