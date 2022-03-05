@@ -1,7 +1,7 @@
 import { BaseAlgorithm } from './BaseAlgorithm'
 
 export class DynamicConnectivity1 implements BaseAlgorithm {
-  name = '動態連結 connect: O(n^2), check: O(1)'
+  name = '動態連結(Quick Find) connect: O(n^2), check: O(1)'
   inputPlaceholder = 
 `第一行是最大數
 前幾組是 union
@@ -41,7 +41,7 @@ ex:
 }
 
 export class DynamicConnectivity2 implements BaseAlgorithm {
-  name = '動態連結 connect: O(n), check: O(n)'
+  name = '動態連結(自己想的) connect: O(n), check: O(n)'
   inputPlaceholder = 
 `第一行是最大數
 前幾組是 union
@@ -79,5 +79,28 @@ ex:
     })
 
     return `${bag.includes(Number(checkA)) && bag.includes(Number(checkB))}`
+  }
+}
+
+export class DynamicConnectivity3 implements BaseAlgorithm {
+  name = '動態連結(Quick Union) connect: , check: '
+  inputPlaceholder = 
+`第一行是最大數
+前幾組是 union
+最後一組是判斷是否相連
+數組是 0~N 的自然數
+ex:
+9
+4,3
+3,8
+6,5
+9,4
+2,1
+0,7
+意思為總共有十個數字（0~9），4 跟 3 相連，3 跟 8 相連，6 跟 5 相連，9 跟 4 相連，2 跟 1 相連，判斷 0 跟 7 有沒有相連，回傳 true or false
+以上述例子，回傳 false
+`
+  exec(input: string): string {
+    return '未實作'
   }
 }
